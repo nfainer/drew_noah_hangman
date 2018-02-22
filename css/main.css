@@ -1,0 +1,23 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*this class will hide elements on our page*/
+.hidden
+{
+		display: none;
+}
+
+.clearfix:after
+{
+	content: " ";
+	visibility: hidden;
+	display: block;
+	height: 0;
+	clear: both;
+}
+
+p
+{
+	font-size: 24px;
+	margin-bottom: 10px;
+}
