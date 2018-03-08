@@ -9,6 +9,7 @@
       wordHint = document.querySelector('.hint-string'),
       guessBox = document.querySelector('input');
       wrongGuesses = 0;
+      correctGuesses = 0;
       resetScreen = document.querySelector('.reset-screen');
       resetButton = resetScreen.querySelector('button');
       wrongLetterList = document.querySelector('.wrong-letters');
@@ -21,13 +22,16 @@
     gamePieces.forEach(piece => piece.classList.remove('show-piece'));
     wrongGuesses = 0;
     guessBox.value = "";// set the input text to nothing
+
+    wrongLetterList.value = "";
   }
 
-  function showResetScreen(){
+  function showResetScreen(message){
     //user has lost, reset stuff and start over
-
     console.log('you lose, loser!');
     resetScreen.classList.add('show-piece');
+
+    resetScreen.querySelector('h3').textContent = message;
   }
 
   function takeGuess() {
@@ -38,6 +42,9 @@
     if (this.value == "" || this.value.length < 1 ) {
       return;
     }
+
+    let currentGuess = this.value;//this is the current letter in the input
+
 //set up the win and loose paths ( if / else)
     if (!currentWord.includes(this.value)) {
       console.log('invalid letter!');
@@ -50,7 +57,7 @@
 
       if (wrongGuesses >= 6) {
 
-        showResetScreen();
+        showResetScreen("Game Over! You Ran out of Guesses!");
         wrongLetterList = 0;
 
 
@@ -59,13 +66,29 @@
       //add one to wrongGuesses
 
     } else {
-      //you loose, reset the game
-      //increment the wrongGuesses variable
+      //increment the wrongGuesses count, show a piece of the hangman
       wrongGuesses++;
     }
 
     } else {
 //winning path    }
+let matchAgainst = currentWord.split("");
+var hintString = wordHint.textContent.split(" ");
+
+matchAgainst.forEach((letter, index) => {
+  if (letter === currentGuess) {
+    hintString[index] = currentGuess;
+    correctGuesses++; // make sure to track correct guesses
+  }
+});
+
+  wordHint.textContent = ""; //make the hint on the screen be empty
+  wordHint.textContent = hintString.join(" ");
+
+  if (correctGuesses === currentWord.length) {
+    showResetScreen();
+  }
+
   }
 }
 
