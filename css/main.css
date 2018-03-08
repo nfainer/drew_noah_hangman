@@ -16,13 +16,18 @@
 	clear: both;
 }
 
+body
+{
+	font-family: 'Russo One', sans-serif;
+}
+
 p
 {
 	font-size: 24px;
 	margin-bottom: 10px;
 }
 
-#body, #head, #leftArm, #rightArm, #leftLeg, #rightLeg, #spaceHose
+#body, #head, #leftArm, #rightArm, #leftLeg, #rightLeg, #spaceHose, #head2
 {
 	opacity: 0;
 }
