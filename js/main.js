@@ -2,7 +2,7 @@
   console.log('hangman script fired!');
 
   // create an array to hold the words to be guessed (MOZILLA DEV NET --> arrays)
-  const words = ["blue", "orange", "yellow", "megenta", "violet"];
+  const words = ["pluto", "jupiter", "mars", "venus", "mercury"];
 
   // set up a variable stack
   let currentWord = null,
@@ -22,13 +22,13 @@
     gamePieces.forEach(piece => piece.classList.remove('show-piece'));
     wrongGuesses = 0;
     guessBox.value = "";// set the input text to nothing
-
-    wrongLetterList.value = "";
+    wrongLetterList.textContent = "";
+    wrongLetterArray = [];
+    init();
   }
 
   function showResetScreen(message){
     //user has lost, reset stuff and start over
-    console.log('you lose, loser!');
     resetScreen.classList.add('show-piece');
 
     resetScreen.querySelector('h3').textContent = message;
@@ -58,7 +58,8 @@
       if (wrongGuesses >= 6) {
 
         showResetScreen("Game Over! You Ran out of Guesses!");
-        wrongLetterList = 0;
+        correctGuesses = 0;
+      //  wrongLetterList = 0;
 
 
 
@@ -86,7 +87,8 @@ matchAgainst.forEach((letter, index) => {
   wordHint.textContent = hintString.join(" ");
 
   if (correctGuesses === currentWord.length) {
-    showResetScreen();
+    showResetScreen("You Win!");
+    correctGuesses = 0;
   }
 
   }
